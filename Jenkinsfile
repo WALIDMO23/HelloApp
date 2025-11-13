@@ -1,45 +1,23 @@
 pipeline {
     agent any
 
-    environment {
-        TF_IN_AUTOMATION = "true"
-    }
-
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                checkout scm
+                echo 'Building...'
             }
         }
 
-        stage('Terraform Init') {
+        stage('Test') {
             steps {
-                echo '\u001B[36m=== Running Terraform Init ===\u001B[0m'
-                sh 'terraform init -input=false'
+                echo 'Running tests...'
             }
         }
 
-        stage('Terraform Plan') {
+        stage('Deploy') {
             steps {
-                echo '\u001B[33m=== Running Terraform Plan ===\u001B[0m'
-                sh 'terraform plan -input=false -out=tfplan'
+                echo 'Deploying...'
             }
-        }
-
-        stage('Terraform Apply') {
-            steps {
-                echo '\u001B[32m=== Applying Terraform Changes ===\u001B[0m'
-                sh 'terraform apply -input=false -auto-approve tfplan'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo '\u001B[32m✔ Terraform completed successfully!\u001B[0m'
-        }
-        failure {
-            echo '\u001B[31m✖ Terraform failed! Check logs.\u001B[0m'
         }
     }
 }
