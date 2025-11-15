@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket       = "hello-devops-production-terraform-state"
+    bucket       = "walidmo-devops-project-repo"
     key          = "eks/terraform.tfstate"
     region       = "eu-west-1"
     encrypt      = true
