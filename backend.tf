@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket       = "walidmo-devops-project-repo"
+    bucket       = "welo-s3-bucket"
     key          = "eks/terraform.tfstate"
-    region       = "eu-west-1"
+    region       = "us-east-1"
     encrypt      = true
     use_lockfile = true
   }
