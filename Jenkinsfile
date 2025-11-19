@@ -1,20 +1,24 @@
 pipeline {
     agent any
 
+    environment {
+        // Terraform workspace (اختياري)
+        TF_WORKSPACE = "default"
+    }
+
     stages {
 
         stage('Checkout Code') {
             steps {
                 echo "🔹 Checking out repository..."
-                git branch: 'master', url: 'https://github.com/Ahmedlebshten/Jenkins-Pipeline-Project'
-                // لو الفرع عندك اسمه main بدل master غيّر السطر ده:
-                // git branch: 'main', url: 'https://github.com/Ahmedlebshten/Jenkins-Pipeline-Project'
+                git branch: 'main', url: 'https://github.com/WALIDMO23/HelloApp.git'
             }
         }
 
         stage('Terraform Init') {
             steps {
                 echo "🔹 Initializing Terraform..."
+                // Terraform سيستخدم IAM Role تلقائيًا من الـ EC2 instance
                 sh 'terraform init -reconfigure'
             }
         }
